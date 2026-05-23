@@ -19,7 +19,8 @@ For debin. If you have something else do a manual install.
 If you found this repository and want to install CAP‑Warn on a supported  
 Linux system, you may use the automated installer:
 
-curl -fsSL https://raw.githubusercontent.com/tmastersmart/cap-warn/main/install_capwarn.sh
+curl -fsSL https://raw.githubusercontent.com/tmastersmart/cap-warn/main/install_capwarn.sh | sudo bash
+
 You may view the installer online. If you wish to.
 
 This installer will:
