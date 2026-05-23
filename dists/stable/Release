@@ -1,0 +1,7 @@
+Origin: CAP-Warn
+Label: CAP-Warn
+Suite: stable
+Codename: stable
+Architectures: amd64
+Components: main
+Description: CAP-Warn APT Repository
