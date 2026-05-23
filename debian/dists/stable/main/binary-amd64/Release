@@ -1,0 +1,14 @@
+Origin: CAP-Warn
+Label: CAP-Warn
+Suite: stable
+Codename: stable
+Version: 5.0.1
+Architectures: amd64
+Components: main
+Date: Sat, 23 May 2026 21:01:40 +0000
+MD5Sum:
+ c13193170726839969bd22eafe858bbb 502 main/binary-amd64/Packages
+ 0cf4bc694ce8d67c93e0629d47f6f5e6 393 main/binary-amd64/Packages.gz
+SHA256:
+ ce64be414b6323a3b0ba3f5037d371b4aeb9a3e4e5ce12192cf162e4f8749a33 502 main/binary-amd64/Packages
+ 7650a256c43eb5e2e500554a746bab1c3f68752d7f8ab6536ee118ac15072c7c 393 main/binary-amd64/Packages.gz
