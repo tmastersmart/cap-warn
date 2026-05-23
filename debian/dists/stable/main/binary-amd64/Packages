@@ -3,7 +3,7 @@ Version: 5.0.0
 Architecture: all
 Maintainer: Michael KJ5MZL la2way.com winnfreenet.com
 Depends: php-cli, php-curl, curl, sox, logrotate
-Filename: debian/pool/main/cap-warn_5.0.0.deb
+Filename: pool/main/cap-warn_5.0.0.deb
 Size: 448764
 MD5sum: 20b1406925bc7a1b98737cc9a10ce6e5
 SHA1: 3ef6c8999c00f1b1d8208531f92b4acffc4dc386
