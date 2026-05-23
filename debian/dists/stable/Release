@@ -5,10 +5,10 @@ Codename: stable
 Version: 5.0.0
 Architectures: amd64
 Components: main
-Date: Sat, 23 May 2026 18:35:39 +0000
+Date: Sat, 23 May 2026 18:59:23 +0000
 MD5Sum:
-d07094790607311110e8cb3994da303f  main/binary-amd64/Packages
-2d96db0959dbabfd2d825a2853851ba2  main/binary-amd64/Packages.gz
+ d07094790607311110e8cb3994da303f 509 main/binary-amd64/Packages
+ 960ed479deb902b1af5a4cd32d343767 397 main/binary-amd64/Packages.gz
 SHA256:
-34febd5b484eae6aa9a8c92bb5a2520f89d025571b2d3ce4f62f2f8c174e1741  main/binary-amd64/Packages
-0697de366a4e37389e53f9519827555b6abe7553de768bfefab9e1b2ea029394  main/binary-amd64/Packages.gz
+ 34febd5b484eae6aa9a8c92bb5a2520f89d025571b2d3ce4f62f2f8c174e1741 509 main/binary-amd64/Packages
+ 51e5f684b9603365d251028efdd2a7a37ee4b77c789cfced4f7a67f9c0022668 397 main/binary-amd64/Packages.gz
