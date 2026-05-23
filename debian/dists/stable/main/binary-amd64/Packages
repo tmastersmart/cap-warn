@@ -3,11 +3,11 @@ Version: 5.0.0
 Architecture: all
 Maintainer: Michael KJ5MZL la2way.com winnfreenet.com
 Depends: php-cli, php-curl, curl, sox, logrotate
-Filename: pool/main/cap-warn_5.0.0.deb
-Size: 447412
-MD5sum: 686345d20aa68b8fecb6097685ba2cdd
-SHA1: 591851da18fa3a8858818ffdd7d1e716c47dda8a
-SHA256: adde80163be38a9d976cc120bb8e440873f4792ef6337774f7059163608d82b0
+Filename: pool/main/cap-warn_5.0.1.deb
+Size: 448360
+MD5sum: a698594c8de0339f94ad514499a0b081
+SHA1: 455d684eb3c83d9ee4a228a844a6f188ac363a97
+SHA256: 448b32dbbb76dbc0e3770342b9276dcd2f1f86a01ff1b2e91fd64b4f6777a374
 Section: utils
 Priority: optional
 Description: CAP-Warn Weather Alert System
