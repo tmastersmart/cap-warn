@@ -1,6 +1,7 @@
 CAP-Warn License Agreement
-Copyright (c) 2023–2026
-KJ5MZL / WRXB288 — la2way.com
+Copyright (c) 2023–2026 KJ5MZL - la2way.com / WRXB288 — lagmrs.com / Michael - winnfreenet.com
+Made in Louisiana 
+
 All Rights Reserved.
 
 This software is NOT public domain. It is copyrighted software
@@ -12,7 +13,7 @@ requirements. All program code, logic, and assets are proprietary
 and remain the exclusive property of the author.
 
 This software does make use of:
-  • The VoiceRSS Text-To-Speech API (public domain service)
+  • The VoiceRSS Text-To-Speech API (public domain api)
   • The National Weather Service CAP/JSON API (public domain data)
 
 These external services do NOT place any licensing requirements
@@ -25,6 +26,7 @@ Permission is granted to use CAP-Warn for FREE on:
   • Amateur (Ham) Radio nodes, repeaters, and hubs
   • GMRS nodes, repeaters, and hubs
   • Personal or club-operated radio systems
+  • Or just a debin system and a speaker
 
 You may:
   • Install and run the CAP-Warn software
@@ -48,15 +50,14 @@ Commercial use, redistribution, or inclusion in any publicly
 distributed system image requires written permission from the
 author.
 
+Licensing for distribution on your image just requires you contact me
+let me know and give me credit. I have to approve it. No bad actors.
+
 ---------------------------------------------------------------
 DISCLAIMER
 ---------------------------------------------------------------
 This software is provided “as-is” without warranty of any kind.
 Use at your own risk.
-
-For permissions, donations, or questions, contact:
-KJ5MZL — la2way.com
-
 
 For permissions, donations, or questions, contact:
 KJ5MZL — la2way.com
