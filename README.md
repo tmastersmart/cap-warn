@@ -1,8 +1,8 @@
 # CAP-Warn  
 ### NOAA / NWS Weather Alert Monitor for Linux Systems  
-**Copyright (c) 2023–2026  
-KJ5MZL / WRXB288 — la2way.com  
-All Rights Reserved.**
+**Copyright (c) 2023–2026  KJ5MZL / WRXB288 — la2way.com - lagmrs.com All Rights Reserved.**
+
+Software made in loUiSiAna its just better.
 
 CAP-Warn is a closed‑source weather alert system designed for Linux hosts.  
 It monitors National Weather Service (NWS) CAP alerts and provides automated  
@@ -28,6 +28,8 @@ This installer will:
 - Add the CAP‑Warn APT repository  
 - Update your package list  
 - Install the `cap-warn` package  
+
+You may wish to read the release blog post first. https://www.lagmrs.com/wp/
 
 ---
 
