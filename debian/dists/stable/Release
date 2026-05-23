@@ -7,8 +7,8 @@ Architectures: amd64
 Components: main
 Date: Sat, 23 May 2026 18:35:39 +0000
 MD5Sum:
-d07094790607311110e8cb3994da303f  main/main/binary-amd64/Packages
-2d96db0959dbabfd2d825a2853851ba2  main/main/binary-amd64/Packages.gz
+d07094790607311110e8cb3994da303f  main/binary-amd64/Packages
+2d96db0959dbabfd2d825a2853851ba2  main/binary-amd64/Packages.gz
 SHA256:
-34febd5b484eae6aa9a8c92bb5a2520f89d025571b2d3ce4f62f2f8c174e1741  main/main/binary-amd64/Packages
-0697de366a4e37389e53f9519827555b6abe7553de768bfefab9e1b2ea029394  main/main/binary-amd64/Packages.gz
+34febd5b484eae6aa9a8c92bb5a2520f89d025571b2d3ce4f62f2f8c174e1741  main/binary-amd64/Packages
+0697de366a4e37389e53f9519827555b6abe7553de768bfefab9e1b2ea029394  main/binary-amd64/Packages.gz
