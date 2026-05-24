@@ -1,80 +1,79 @@
 #!/bin/bash
 set -e
 
-# ============================================================
-#  CAP-Warn Installer Script
-# ============================================================
-
 echo "============================================================"
-echo " CAP-Warn Installer (c)2026 by KJ5MZL Made in Louisiana"
+echo " CAP-Warn Installer — Made in Louisiana"
 echo "============================================================"
+echo "Initializing… please wait while the vacuum tubes warm up."
 echo ""
-echo "You will need a VoiceRSS API key. To do custom text to speach"
+
+echo "Before running setup.sh you MUST have a VoiceRSS API key."
 echo "Get one free at: https://www.voicerss.org/"
 echo ""
 read -p "Press ENTER to continue... "
+echo "Thank you. Your response has been recorded on magnetic tape."
 
-# ============================================================
-# Install GPG key
-# ============================================================
-echo "Ive got a KEY for you. Its a fancy key "
+echo ""
 echo "Installing CAP-Warn repository key..."
+echo "Please stand by. Operator is loading punch cards."
 
 if ! curl -sSL https://raw.githubusercontent.com/tmastersmart/cap-warn/main/debian/public.key \
     | sudo gpg --dearmor -o /usr/share/keyrings/capwarn.gpg; then
     echo "ERROR: Failed to download or install GPG key."
+    echo "Suggestion: Try reseating the vacuum tubes."
     exit 1
 fi
 
-echo "Key installed."
+echo "Key installed. No punch cards were harmed."
 
-# ============================================================
-# Add APT source
-# ============================================================
+echo ""
 echo "Adding CAP-Warn APT repository..."
+echo "Do not fold, spindle, or mutilate this repository."
 
 if ! sudo bash -c 'cat > /etc/apt/sources.list.d/capwarn.list <<EOF
-deb [signed-by=/usr/share/keyrings/capwarn.gpg] https://raw.githubusercontent.com/tmastersmart/cap-warn/main/debian stable main
+deb [arch=all signed-by=/usr/share/keyrings/capwarn.gpg] https://raw.githubusercontent.com/tmastersmart/cap-warn/main/debian stable main
 EOF'; then
     echo "ERROR: Failed to write APT source file."
+    echo "Please notify the nearest mainframe operator."
     exit 1
 fi
 
-echo "Repository added."
+echo "Repository added. Magnetic tape rewinding..."
 
-# ============================================================
-# Update APT
-# ============================================================
+echo ""
 echo "Updating package lists..."
 if ! sudo apt update; then
-    echo "ERROR: APT update failed. Check your repository configuration."
+    echo "ERROR: APT update failed."
+    echo "Possible cause: cosmic rays or gremlins in the punch cards."
     exit 1
 fi
 
-# ============================================================
-# Install CAP-Warn
-# ============================================================
+echo ""
 echo "Installing CAP-Warn..."
+echo "Please wait. The system is calculating using state-of-the-art 1960s math."
+
 if ! sudo apt install -y cap-warn; then
-    echo "ERROR: Failed to install CAP-Warn package."
+    echo "ERROR: Failed to install CAP-Warn."
+    echo "Try again after adjusting the vacuum tube bias."
     exit 1
 fi
 
-echo ""
+sleep 1
+clear
+
 echo "============================================================"
-echo " CAP-Warn installation complete! Made in Louisiana"
+echo " CAP-Warn installation complete!"
+echo " This system now has more power than NASA had in 1969."
 echo "============================================================"
 echo ""
 
-# ============================================================
-# Ask user if they want to run setup.sh
-# ============================================================
 read -p "Would you like to run setup.sh now? (y/N): " RUNSETUP
 
 case "$RUNSETUP" in
     y|Y|yes|YES)
         echo ""
         echo "Launching setup.sh..."
+        echo "Please stand by while the operator flips the correct switches."
         cd /usr/share/cap-warn
         sudo bash setup.sh
         ;;
@@ -83,11 +82,13 @@ case "$RUNSETUP" in
         echo "You can run setup later with:"
         echo "  cd /usr/share/cap-warn"
         echo "  sudo bash setup.sh"
+        echo ""
+        echo "System ready. Please notify the next shift operator."
         ;;
 esac
 
 echo ""
 echo "============================================================"
 echo " CAP-Warn is installed and ready."
-echo "Welcome to software made in loUiSiAna its just better"
+echo " Welcome to software made in Louisiana — it's just better."
 echo "============================================================"
