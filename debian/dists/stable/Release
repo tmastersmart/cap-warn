@@ -3,12 +3,12 @@ Label: CAP-Warn
 Suite: stable
 Codename: stable
 Version: 5.0.3
-Architectures: All
+Architectures: all
 Components: main
-Date: Sun, 24 May 2026 03:12:44 +0000
+Date: Sun, 24 May 2026 03:30:18 +0000
 MD5Sum:
- c00f690ad5554a91d02cf6df750feb5a 506 main/binary-all/Packages
- 5441d606046403966d2aed7e7ea62b60 392 main/binary-all/Packages.gz
+ 1047e18981897405e02908c2c71b7146 506 main/binary-all/Packages
+ 944fc1268fa16a51e65576f473670b46 394 main/binary-all/Packages.gz
 SHA256:
- 86abc0f54c88b0bd6850bddaa7813b586164be7bbf04b487cba2a6c50b5c506d 506 main/binary-all/Packages
- 2bf6e5f26c1b01e088f9bb7d15747a0d0e6f1a97da33017ad597b902af892189 392 main/binary-all/Packages.gz
+ 4f98f0601e914e4f8aeef1d604be8068ce938eea787a5fcfe27f21ee3a00be6f 506 main/binary-all/Packages
+ e93bb6dd30a9fbe16e5401fb62fb3387f11b3758d61f71aeb85fd62ca8e901dc 394 main/binary-all/Packages.gz
