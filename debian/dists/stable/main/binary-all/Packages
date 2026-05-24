@@ -1,0 +1,15 @@
+Package: cap-warn
+Version: 5.0.3
+Architecture: all
+Maintainer: Michael KJ5MZL la2way.com winnfreenet.com
+Depends: php-cli, php-curl, curl, sox, logrotate
+Filename: pool/main/cap-warn_5.0.3_all.deb
+Size: 449188
+MD5sum: ea2b4c11dc09de9d755a2246b62e6d5c
+SHA1: 7fd4c14abc76a01e2814b164fd5c25b6df03fd55
+SHA256: dbe12a86421e69a3ab83caaded075750dd5cef64aa25c78d6be56b1b04c6e545
+Section: utils
+Priority: optional
+Description: CAP-Warn Weather Alert System
+ A standalone weather alert decoder and audio generator.
+
