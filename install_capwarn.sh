@@ -58,37 +58,19 @@ if ! sudo apt install -y cap-warn; then
     exit 1
 fi
 
-sleep 1
-clear
+
 
 echo "============================================================"
 echo " CAP-Warn installation complete!"
 echo " This system now has more power than NASA had in 1969."
-echo "============================================================"
-echo ""
-
-read -p "Would you like to run setup.sh now? (y/N): " RUNSETUP
-
-case "$RUNSETUP" in
-    y|Y|yes|YES)
-        echo ""
-        echo "Launching setup.sh..."
-        echo "Please stand by while the operator flips the correct switches."
-        cd /usr/share/cap-warn
-        sudo bash setup.sh
-        ;;
-    *)
-        echo ""
-        echo "You can run setup later with:"
-        echo "  cd /usr/share/cap-warn"
-        echo "  sudo bash setup.sh"
-        echo ""
-        echo "System ready. Please notify the next shift operator."
-        ;;
-esac
-
-echo ""
-echo "============================================================"
-echo " CAP-Warn is installed and ready."
+echo " "
 echo " Welcome to software made in Louisiana — it's just better."
+echo "============================================================"
+
+cd /usr/share/cap-warn
+echo ""
+echo "You are now in the CAP-Warn directory."
+echo "To complete setup, type:"
+echo "  sudo bash setup.sh"
+echo ""
 echo "============================================================"
