@@ -5,10 +5,10 @@ Codename: stable
 Version: 5.0.5
 Architectures: all
 Components: main
-Date: Tue, 26 May 2026 04:33:29 +0000
+Date: Tue, 26 May 2026 05:00:10 +0000
 MD5Sum:
- 7325c4d31fcbc1629d48f17ef9887d71 568 main/binary-all/Packages
- c1998ab4bedd37eede5087af7370a322 428 main/binary-all/Packages.gz
+ 65687b6de409a8ac3c0b91b6605ca50e 568 main/binary-all/Packages
+ 991aae07b7a387798f85575526ef37ee 432 main/binary-all/Packages.gz
 SHA256:
- 2ab98b39adde9b5c578566ccb7260469465a2547020b078419c5e79376daf2d2 568 main/binary-all/Packages
- 7b1a43f7e569267cac138c17f6ad5f0bebda3b48082a3cee16031e5a8e6b4938 428 main/binary-all/Packages.gz
+ 00911b5d2ca9c09d5c358785fc2e9c85a66bc407a7b88d318ad2cdca7fe473a5 568 main/binary-all/Packages
+ 92b46b4098351a6128391cf6f95270213671b269fddf9010cd251d04fce2cc8c 432 main/binary-all/Packages.gz
