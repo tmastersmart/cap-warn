@@ -4,12 +4,12 @@ Architecture: all
 Maintainer: Michael KJ5MZL la2way.com winnfreenet.com
 Depends: php-cli, php-curl, php-xml, php-mbstring, php-json, curl, sox, logrotate, asterisk-core-sounds-en-gsm
 Filename: pool/main/cap-warn_5.1.0_all.deb
-Size: 583628
-MD5sum: eaa4ff040286645a8bce4c7441764c24
-SHA1: 361dd1f19a041b9e9d9437f11c8dbe93610c9c0d
-SHA256: 9da63d13a9c5c781aece4479542fb40867da0f046db4873a2721bb5a0ee757b6
+Size: 583648
+MD5sum: 740fba80c8f7e39dcbdd0b4bb7a6c554
+SHA1: baa8656d05a46c4f08c17e5b03f3590259c66eb2
+SHA256: f71cf9c2079bad69cc7131bf94e4a7b3daf32ac0a4007025a380b5b116ac8448
 Section: utils
 Priority: optional
-Description: CAP-Warn Weather Alert System
- A standalone weather alert decoder and audio generator.
+Description: CAP-Warn Weather Alert for ASL3
+ A standalone weather alert decoder and audio generator for ASL3.
 
