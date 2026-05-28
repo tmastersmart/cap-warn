@@ -1,13 +1,13 @@
 Package: cap-warn
-Version: 5.1.19
+Version: 5.1.20
 Architecture: all
 Maintainer: Michael KJ5MZL la2way.com winnfreenet.com
 Depends: php-cli, php-curl, php-xml, php-mbstring, php-json, curl, sox, logrotate, asterisk-core-sounds-en-gsm
-Filename: pool/main/cap-warn_5.1.19_all.deb
-Size: 585500
-MD5sum: 0f21e16830d2a2c81f24f0c0a4d1b51c
-SHA1: cff01ed1c0b5c73f31b65e31ef730ad52145e1c6
-SHA256: f936d1e398e7ee042b47fdb2bcff9937594bdc8410b1f65f8bbbf6810975ca56
+Filename: pool/main/cap-warn_5.1.20_all.deb
+Size: 585772
+MD5sum: fab117e0cf9c2e6d41cf2fc0151f0c7f
+SHA1: 8c4589a908f8b5de68f617ad3783bf013aadc5c1
+SHA256: a46738ef313eba96477a1ed0000764e7901b2a12178efdaab843c7685fda3c83
 Section: utils
 Priority: optional
 Description: CAP-Warn Weather Alert for ASL3
