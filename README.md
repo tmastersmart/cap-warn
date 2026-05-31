@@ -1,5 +1,5 @@
 # CAP-Warn  
-### NOAA / NWS Weather Alerts for ASL3 and allstar  
+### NOAA / NWS Weather Alerts for ASL3 and allstar  Skywarn replacement
 **Copyright (c) 2023–2026  KJ5MZL / WRXB288 — la2way.com - lagmrs.com All Rights Reserved.**
 
 Software made in loUiSiAna its just better.No more manualy installing  on ASL3 all my programs will now have a installer and a update repo.
