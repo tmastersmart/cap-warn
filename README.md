@@ -34,7 +34,7 @@ You may wish to read the release blog post first. https://www.lagmrs.com/wp/
 
 ---
 
-## Important: VoiceRSS API Key Required is optional
+## Important: VoiceRSS API Key is optional
 
 Before running `setup.sh` after installation, you need a free  
 VoiceRSS Text‑To‑Speech API key. If you want better non robo speach.
@@ -54,7 +54,7 @@ sudo apt upgrade cap-warn
 
 No more manualy installing  on ASL3 all my programs will now have a installer and a update repo.
 
-##Goals
+## Goals
 
 1) To createate a replacement to skywarn without using perl and without using anyone elses code. All code is 100% new and written in PHP.
 2) To create a system thats easy to install and use and will autoupdate with your normal updates. You should not have to know any codes or set anything up all you need is your lat and lon.
