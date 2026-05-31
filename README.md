@@ -121,3 +121,4 @@ CAP‑Warn is designed to run as a lightweight polling script, not a full‑time
 
 
 
+<img width="120" height="100" alt="copyscape-seal-gray-120x100" src="https://github.com/user-attachments/assets/77716d9d-65d3-4a65-b345-55577cfd1e37" />
