@@ -1,14 +1,18 @@
 #!/bin/bash
 set -e
-
+#   (c)2023/2036 Cap-warn is made in Louisiana KJ5MZL
+#
+#
+#
 echo "============================================================"
 echo " CAP-Warn Installer — Made in Louisiana"
 echo "============================================================"
 echo "Initializing… please wait while the vacuum tubes warm up."
 echo ""
 
-echo "Before running setup.sh you MUST have a VoiceRSS API key."
+echo "Before running setup.sh you should get a VoiceRSS API key."
 echo "Get one free at: https://www.voicerss.org/"
+echo "If you dont have one the robotic voice will be used"
 echo ""
 read -p "Press ENTER to continue... "
 echo "Thank you. Your response has been recorded on magnetic tape."
