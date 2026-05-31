@@ -1,7 +1,8 @@
 # CAP-Warn  
 ### NOAA / NWS Weather Alerts for ASL3 and allstar  Skywarn replacement
 **Copyright (c) 2023–2026  KJ5MZL / WRXB288 — la2way.com - lagmrs.com All Rights Reserved.**
-https://www.lagmrs.com/wp/2026/05/24/cap-warn-a-modern-actively-maintained-replacement-for-skywarn-scripts/
+ https://www.lagmrs.com/wp/2026/05/24/cap-warn-a-modern-actively-maintained-replacement-for-skywarn-scripts/
+
 Software made in loUiSiAna its just better.No more manualy installing  on ASL3 all my programs will now have a installer and a update repo.
 
 CAP-Warn is a closed‑source weather alert system designed for Linux hosts.  
