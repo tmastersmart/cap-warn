@@ -16,7 +16,7 @@ CAP‑Warn is a 100% new not based on any other code, actively maintained weathe
 It monitors **National Weather Service (NWS) CAP alerts**, generates **automated audio warnings**, and includes **high‑temperature monitoring for Raspberry Pi systems**.
 
 This repository contains the **APT repository files** used for installation and updates.  
-If you want to install CAP‑Warn on a supported Linux system, use the one‑line installer below.
+If you want to install CAP‑Warn on a supported Linux system, use the one‑line installer below.<img width="80" height="44" alt="Apt-get_logo" src="https://github.com/user-attachments/assets/c7e6b457-99fa-4f52-accd-43ee713299ce" />
 
 ---
 
@@ -82,7 +82,7 @@ No more manual installs — CAP‑Warn now updates with your normal system packa
   Supports VoiceRSS for natural‑sounding speech, with fallback to ASL3’s built‑in TTS if no API key is provided.
 
 - **Automatic APT Updates**  
-  CAP‑Warn installs as a Debian package and updates through your normal `apt upgrade` process — no more manual installs or script replacements.
+  CAP‑Warn installs as a Debian package and updates through your normal `apt upgrade` process — no more manual installs or script replacements.<img width="80" height="44" alt="Apt-get_logo" src="https://github.com/user-attachments/assets/c7e6b457-99fa-4f52-accd-43ee713299ce" />
 
 - **Smart Cron Scheduling**  
   Runs on a safe, offset schedule that avoids the top‑of‑hour NWS/NHC update storm and system clock sync events.
@@ -115,6 +115,6 @@ No more manual installs — CAP‑Warn now updates with your normal system packa
 
    
 
-<img width="80" height="44" alt="Apt-get_logo" src="https://github.com/user-attachments/assets/c7e6b457-99fa-4f52-accd-43ee713299ce" />
+
 <img width="80" height="15" alt="php-power-micro2" src="https://github.com/user-attachments/assets/94f0f6a7-64e9-40bc-aa22-b01cdcc22919" />
 
