@@ -114,7 +114,7 @@ No more manual installs — CAP‑Warn now updates with your normal system packa
    CAP‑Warn tracks active cyclones and reports new advisories as they are released by the National Hurricane Center.
    
 4. **Provide a light weight utility that wont overload the cpu.**
-  Overloading the CPU is a major problem on HUBs and pis so we need to keep the package light and exit when done.
+   Overloading the CPU is a major problem on HUBs and pis so we need to keep the package light and exit when done.
 
 ## Why I Use Cron Instead of a System Service
 CAP‑Warn is designed to run as a lightweight polling script, not a full‑time daemon. It wakes up, checks for new alerts, processes them, and exits. Because of this design, using cron is the most efficient and reliable choice. Cron allows users to choose how often CAP‑Warn runs, supports safe offset scheduling to avoid the top‑of‑hour NWS/NHC update surge, and keeps the system simple without requiring a persistent background service. A systemd service is ideal for programs that must run continuously or restart automatically, but CAP‑Warn doesn’t need that overhead. Cron provides predictable timing, low resource usage, and easy user configuration — making it the right tool for this job. And keeping with goal 4 above.
