@@ -97,7 +97,7 @@ No more manual installs — CAP‑Warn now updates with your normal system packa
   One‑line installer, automatic repo setup, and a guided setup script that configures everything without requiring technical knowledge.
 
 - **Actively Maintained**  
-  100% original code written in PHP — not based on Skywarn, SkywarnPlus, or any legacy scripts. Fully maintained and updated.
+  100% original code written in PHP — not based on Skywarn, SkywarnPlus, or any legacy scripts. Fully maintained and updated.<img width="80" height="15" alt="php-power-micro2" src="https://github.com/user-attachments/assets/94f0f6a7-64e9-40bc-aa22-b01cdcc22919" />
 
 ---
 
@@ -116,5 +116,4 @@ No more manual installs — CAP‑Warn now updates with your normal system packa
    
 
 
-<img width="80" height="15" alt="php-power-micro2" src="https://github.com/user-attachments/assets/94f0f6a7-64e9-40bc-aa22-b01cdcc22919" />
 
