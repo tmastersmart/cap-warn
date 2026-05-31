@@ -1,3 +1,4 @@
+
 # CAP‑Warn  
 ### NOAA / NWS Weather Alerts for ASL3 and AllStar — Modern Skywarn Replacement  
 <img width="1024" height="1024" alt="Copilot_20260524_010328" src="https://github.com/user-attachments/assets/b00a748c-2858-40aa-be8b-c80b26fff8fc" />
@@ -119,6 +120,6 @@ No more manual installs — CAP‑Warn now updates with your normal system packa
 ## Why I Use Cron Instead of a System Service
 CAP‑Warn is designed to run as a lightweight polling script, not a full‑time daemon. It wakes up, checks for new alerts, processes them, and exits. Because of this design, using cron is the most efficient and reliable choice. Cron allows users to choose how often CAP‑Warn runs, supports safe offset scheduling to avoid the top‑of‑hour NWS/NHC update surge, and keeps the system simple without requiring a persistent background service. A systemd service is ideal for programs that must run continuously or restart automatically, but CAP‑Warn doesn’t need that overhead. Cron provides predictable timing, low resource usage, and easy user configuration — making it the right tool for this job. And keeping with goal 4 above.
 
+<img width="200" height="25" alt="copyscape-banner-white-200x25" src="https://github.com/user-attachments/assets/c1662005-fd61-4b98-92c8-19c72f6420eb" />
 
 
-<img width="120" height="100" alt="copyscape-seal-gray-120x100" src="https://github.com/user-attachments/assets/77716d9d-65d3-4a65-b345-55577cfd1e37" />
