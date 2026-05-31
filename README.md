@@ -1,64 +1,114 @@
-# CAP-Warn  
-### NOAA / NWS Weather Alerts for ASL3 and allstar  Skywarn replacement
-**Copyright (c) 2023–2026  KJ5MZL / WRXB288 — la2way.com - lagmrs.com All Rights Reserved.**
+# CAP‑Warn  
+### NOAA / NWS Weather Alerts for ASL3 and AllStar — Modern Skywarn Replacement  
 
-[CAP‑Warn Release Blog Post](https://www.lagmrs.com/wp/2026/05/24/cap-warn-a-modern-actively-maintained-replacement-for-skywarn-scripts/)
+**© 2023–2026 KJ5MZL / WRXB288 — la2way.com • lagmrs.com — All Rights Reserved.**
 
-Software made in loUiSiAna its just better.No more manualy installing  on ASL3 all my programs will now have a installer and a update repo.
+[Read the CAP‑Warn Release Blog Post](https://www.lagmrs.com/wp/2026/05/24/cap-warn-a-modern-actively-maintained-replacement-for-skywarn-scripts/)
 
-CAP-Warn is a closed‑source weather alert system designed for Linux hosts.  
-It monitors National Weather Service (NWS) CAP alerts and provides automated  
-audio warnings using VoiceRSS Text‑To‑Speech.As well as high cpu temp for PI
+Software made in loUiSiAna — it’s just better.  
+No more manually installing on ASL3. All my programs now include an installer and an update repository.
 
-This repository contains the **APT repository files**.  For APT-GET INSTALL and UPDATE
+---
 
+## About CAP‑Warn
+
+CAP‑Warn is a 100% new not based on any other code, actively maintained weather alert system for Linux hosts.  
+It monitors **National Weather Service (NWS) CAP alerts**, generates **automated audio warnings**, and includes **high‑temperature monitoring for Raspberry Pi systems**.
+
+This repository contains the **APT repository files** used for installation and updates.  
+If you want to install CAP‑Warn on a supported Linux system, use the one‑line installer below.
 
 ---
 
 ## Installation (One‑Line Installer)
-For debin.
 
-If you found this repository and want to install CAP‑Warn on a supported  
-Linux system, you may use the automated installer:
+For Debian‑based systems:
 
 curl -fsSL https://raw.githubusercontent.com/tmastersmart/cap-warn/main/install_capwarn.sh | sudo bash
 
-You may view the installer online. If you wish to.
 
-This installer will:
+You may also view the installer online if you wish.
+
+The installer will:
 
 - Install the CAP‑Warn APT signing key  
 - Add the CAP‑Warn APT repository  
 - Update your package list  
 - Install the `cap-warn` package  
 
-You may wish to read the release blog post first. https://www.lagmrs.com/wp/
+You may want to read the blog first:  
+[Visit the CAP‑Warn Blog](https://www.lagmrs.com/wp/)
 
 ---
 
-## Important: VoiceRSS API Key is optional
+## VoiceRSS API Key (Optional)
 
-Before running `setup.sh` after installation, you need a free  
-VoiceRSS Text‑To‑Speech API key. If you want better non robo speach.
-You can obtain one at:
-https://www.voicerss.org/
-Setup will complete without this key and use tts ststem built in asl3.
+CAP‑Warn supports **VoiceRSS Text‑To‑Speech** for higher‑quality audio output.  
+You can obtain a free API key here:
+
+[VoiceRSS Website](https://www.voicerss.org/)
+
+If you do not provide a key, CAP‑Warn will fall back to the built‑in ASL3 TTS system.
+
 ---
 
 ## Automatic Updates
-Once installed, CAP‑Warn will receive updates automatically through APT:
 
-after install from now own you will get upgrades via the update system 
+Once installed, CAP‑Warn updates automatically through APT.
+
+To manually update:
 
 sudo apt update
 sudo apt upgrade cap-warn
 
 
-No more manualy installing  on ASL3 all my programs will now have a installer and a update repo.
+
+No more manual installs — CAP‑Warn now updates with your normal system packages.
+
+---
+
+## Features
+
+- **Automatic GPS‑Based Alert Targeting**  
+  CAP‑Warn uses your latitude and longitude to automatically determine your forecast zone, county/parish zone, and fire weather zone. No UGC codes or manual configuration required.
+
+- **NWS CAP Alert Monitoring**  
+  Continuously monitors the National Weather Service CAP feed for watches, warnings, advisories, and special weather statements relevant to your exact location.
+
+- **Hurricane & Tropical Cyclone Tracking**  
+  Automatically fetches National Hurricane Center (NHC) cyclone advisories and announces only new advisories, with distance filtering to avoid irrelevant storms.
+
+- **High‑Quality Text‑to‑Speech**  
+  Supports VoiceRSS for natural‑sounding speech, with fallback to ASL3’s built‑in TTS if no API key is provided.
+
+- **Automatic APT Updates**  
+  CAP‑Warn installs as a Debian package and updates through your normal `apt upgrade` process — no more manual installs or script replacements.
+
+- **Smart Cron Scheduling**  
+  Runs on a safe, offset schedule that avoids the top‑of‑hour NWS/NHC update storm and system clock sync events.
+
+- **Zone + Point Alert Merging**  
+  Combines point‑based alerts with zone‑level alerts to ensure complete coverage, including polygon warnings and county‑wide advisories.
+
+- **Pi Temperature Monitoring**  
+  Monitors Raspberry Pi CPU temperature and issues alerts if overheating is detected.
+
+- **Installer + Setup Wizard**  
+  One‑line installer, automatic repo setup, and a guided setup script that configures everything without requiring technical knowledge.
+
+- **Actively Maintained**  
+  100% original code written in PHP — not based on Skywarn, SkywarnPlus, or any legacy scripts. Fully maintained and updated.
+
+---
 
 ## Goals
 
-1) To create a replacement to skywarn or skywarnplus without using perl and without using anyone elses code. All code is 100% new and written in PHP.
-2) To create a system thats easy to install and use and will autoupdate with your normal updates. You should not have to know any codes or set anything up all you need is your lat and lon.
-3) To Monitor huricanes for users in the huricane zone with reports as they are released by the huricane center.
+1. **Create a modern replacement for Skywarn/SkywarnPlus**  
+   No Perl, no reused code — CAP‑Warn is 100% new and written entirely in PHP.
 
+2. **Make installation and updates effortless**  
+   Everything installs via APT and updates automatically.  
+   No zone codes, no UGC lists — just enter your **latitude and longitude**.
+
+3. **Provide hurricane monitoring for coastal users**  
+   CAP‑Warn tracks active cyclones and reports new advisories as they are released by the National Hurricane Center.
