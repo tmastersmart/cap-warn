@@ -1,6 +1,6 @@
 # CAP‑Warn  
 ### NOAA / NWS Weather Alerts for ASL3 and AllStar — Modern Skywarn Replacement  
-
+<img width="1024" height="1024" alt="Copilot_20260524_010328" src="https://github.com/user-attachments/assets/b00a748c-2858-40aa-be8b-c80b26fff8fc" />
 **© 2023–2026 KJ5MZL / WRXB288 — la2way.com • lagmrs.com — All Rights Reserved.**
 
 [Read the CAP‑Warn Release Blog Post](https://www.lagmrs.com/wp/2026/05/24/cap-warn-a-modern-actively-maintained-replacement-for-skywarn-scripts/)
@@ -113,8 +113,8 @@ No more manual installs — CAP‑Warn now updates with your normal system packa
 3. **Provide hurricane monitoring for coastal users**  
    CAP‑Warn tracks active cyclones and reports new advisories as they are released by the National Hurricane Center.
 
-   <img width="1024" height="1024" alt="Copilot_20260524_010328" src="https://github.com/user-attachments/assets/b00a748c-2858-40aa-be8b-c80b26fff8fc" />
-<img width="1024" height="1024" alt="Copilot_20260524_010328" src="https://github.com/user-attachments/assets/cf48cb59-e2b9-4294-8cbd-183844e47ad1" />
-<img width="480" height="144" alt="Apt-get_logo" src="https://github.com/user-attachments/assets/c7e6b457-99fa-4f52-accd-43ee713299ce" />
+   
+
+<img width="80" height="44" alt="Apt-get_logo" src="https://github.com/user-attachments/assets/c7e6b457-99fa-4f52-accd-43ee713299ce" />
 <img width="80" height="15" alt="php-power-micro2" src="https://github.com/user-attachments/assets/94f0f6a7-64e9-40bc-aa22-b01cdcc22919" />
 
