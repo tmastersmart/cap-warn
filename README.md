@@ -6,6 +6,8 @@
 
 [Read the CAP‑Warn Release Blog Post](https://www.lagmrs.com/wp/2026/05/24/cap-warn-a-modern-actively-maintained-replacement-for-skywarn-scripts/)
 
+Updated info will be on the blog post.
+
 Software made in loUiSiAna — it’s just better.  
 No more manually installing on ASL3. All my programs now include an installer and an update repository.
 
