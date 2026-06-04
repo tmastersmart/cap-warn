@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-#   (c)2023/2036 Cap-warn is made in Louisiana KJ5MZL
+#   (c)2023/2026 Cap-warn is made in Louisiana KJ5MZL
 #
 #
 #  
@@ -12,7 +12,8 @@ echo ""
 
 echo "Before running setup.sh you should get a VoiceRSS API key."
 echo "Get one free at: https://www.voicerss.org/"
-echo "If you dont have one the robotic voice will be used"
+echo "If you dont have one the asl3 Piper will be installed."
+echo "If you have a PI please use Voicerss.prg API Key
 echo ""
 read -p "Press ENTER to continue... "
 echo "Thank you. Your response has been recorded on magnetic tape."
@@ -72,6 +73,8 @@ echo " Welcome to software made in Louisiana — it's just better."
 echo "============================================================"
 
 cd /usr/share/cap-warn
+echo ""
+echo "Get your node Lat/Lon and KEY ready"
 echo ""
 echo "You are now in the CAP-Warn directory."
 echo "To complete setup, type:"
