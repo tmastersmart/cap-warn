@@ -1,6 +1,7 @@
 CAP-Warn License Agreement
-Copyright (c) 2023–2026 KJ5MZL - la2way.com / WRXB288 — lagmrs.com / Michael - winnfreenet.com
-Made in Louisiana 
+Copyright (c) 2023–2026
+KJ5MZL – la2way.com / WRXB288 – lagmrs.com / Michael – winnfreenet.com
+Made in Louisiana, USA
 
 All Rights Reserved.
 
@@ -8,28 +9,28 @@ This software is NOT public domain. It is copyrighted software
 distributed under the terms of this license only.
 
 CAP-Warn contains NO open-source software and is NOT subject to
-any open-source license, copyleft license, or public-domain
-requirements. All program code, logic, and assets are proprietary
-and remain the exclusive property of the author.
+any open-source, copyleft, or public-domain licensing requirements.
+All program code, logic, and assets are proprietary and remain the
+exclusive property of the author.
 
 This software does make use of:
-  • The VoiceRSS Text-To-Speech API (public domain api)
+  • The VoiceRSS Text-To-Speech API (public domain API)
   • The National Weather Service CAP/JSON API (public domain data)
 
-These external services do NOT place any licensing requirements
+These external services do NOT impose any licensing requirements
 on CAP-Warn itself.
 
 ---------------------------------------------------------------
-PERMITTED USE
+PERMITTED USE (FreeViewWare)
 ---------------------------------------------------------------
 Permission is granted to use CAP-Warn for FREE on:
   • Amateur (Ham) Radio nodes, repeaters, and hubs
   • GMRS nodes, repeaters, and hubs
   • Personal or club-operated radio systems
-  • Or just a debin system and a speaker
+  • Any standard Debian system with a speaker
 
 You may:
-  • Install and run the CAP-Warn software
+  • Install and run CAP-Warn
   • Use it for weather alerting on your radio systems
   • Receive updates through the official APT repository
   • Make backup copies for your own systems
@@ -50,8 +51,9 @@ Commercial use, redistribution, or inclusion in any publicly
 distributed system image requires written permission from the
 author.
 
-Licensing for distribution on your image just requires you contact me
-let me know and give me credit. I have to approve it. No bad actors.
+Distribution approval is simple: contact me, tell me what you
+want to do, and give proper credit. I must approve it. No bad
+actors, no misuse.
 
 ---------------------------------------------------------------
 DISCLAIMER

@@ -71,14 +71,15 @@ echo " CAP-Warn installation complete!"
 echo " This system now has more power than NASA had in 1969."
 echo " "
 echo " Welcome to software made in Louisiana — it's just better."
+echo " Get your node setup fast no editing."
 echo "============================================================"
 
 cd /usr/share/cap-warn
 echo ""
-echo "Get your node Lat/Lon and KEY ready"
+echo "Get your node# Lat/Lon and KEY ready"
 echo ""
 echo "You are now in the CAP-Warn directory."
-echo "To complete setup, type:"
+echo "To complete setup run setup system, type:"
 echo "  sudo bash setup.sh"
-echo ""
-echo "============================================================"
+
+
