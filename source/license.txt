@@ -46,6 +46,8 @@ You may NOT:
   • Reverse-engineer, decompile, or modify the software
   • Remove or alter copyright notices
   • Claim ownership or authorship
+  • Fork this repo into your directory and modify.
+  • Extract source and put it in your github
 
 Commercial use, redistribution, or inclusion in any publicly
 distributed system image requires written permission from the
