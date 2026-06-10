@@ -1,5 +1,9 @@
 #!/bin/bash
-
+# Require sudo
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run CAP-Warn using: sudo bash /usr/bin/cap-warn/sudo cap_warn"
+    exit 1
+fi
 # Wrapper for CAP‑Warn
 # Passes all arguments from cron or CLI directly to the PHP script.
 
