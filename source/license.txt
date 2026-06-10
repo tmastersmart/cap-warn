@@ -1,0 +1,65 @@
+CAP-Warn License Agreement
+Copyright (c) 2023–2026
+KJ5MZL – la2way.com / WRXB288 – lagmrs.com / Michael – winnfreenet.com
+Made in Louisiana, USA
+
+All Rights Reserved.
+
+This software is NOT public domain. It is copyrighted software
+distributed under the terms of this license only.
+
+CAP-Warn contains NO open-source software and is NOT subject to
+any open-source, copyleft, or public-domain licensing requirements.
+All program code, logic, and assets are proprietary and remain the
+exclusive property of the author.
+
+This software does make use of:
+  • The VoiceRSS Text-To-Speech API (public domain API)
+  • The National Weather Service CAP/JSON API (public domain data)
+
+These external services do NOT impose any licensing requirements
+on CAP-Warn itself.
+
+---------------------------------------------------------------
+PERMITTED USE (FreeViewWare)
+---------------------------------------------------------------
+Permission is granted to use CAP-Warn for FREE on:
+  • Amateur (Ham) Radio nodes, repeaters, and hubs
+  • GMRS nodes, repeaters, and hubs
+  • Personal or club-operated radio systems
+  • Any standard Debian system with a speaker
+
+You may:
+  • Install and run CAP-Warn
+  • Use it for weather alerting on your radio systems
+  • Receive updates through the official APT repository
+  • Make backup copies for your own systems
+
+---------------------------------------------------------------
+PROHIBITED USE
+---------------------------------------------------------------
+You may NOT:
+  • Redistribute the software or modified versions
+  • Host, mirror, or repackage the .deb files or APT repository
+  • Include CAP-Warn in any system image or software bundle
+  • Sell, rent, or charge for access to CAP-Warn
+  • Reverse-engineer, decompile, or modify the software
+  • Remove or alter copyright notices
+  • Claim ownership or authorship
+
+Commercial use, redistribution, or inclusion in any publicly
+distributed system image requires written permission from the
+author.
+
+Distribution approval is simple: contact me, tell me what you
+want to do, and give proper credit. I must approve it. No bad
+actors, no misuse.
+
+---------------------------------------------------------------
+DISCLAIMER
+---------------------------------------------------------------
+This software is provided “as-is” without warranty of any kind.
+Use at your own risk.
+
+For permissions, donations, or questions, contact:
+KJ5MZL — la2way.com
