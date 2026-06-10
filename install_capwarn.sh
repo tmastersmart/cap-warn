@@ -5,7 +5,7 @@ set -e
 #
 #  
 echo "============================================================"
-echo " CAP-Warn Easy Installer — Made in Louisiana"
+echo " CAP-Warn Easy Installer — Made in Louisiana - Installer v2"
 echo "============================================================"
 echo "Initializing… please wait while the vacuum tubes warm up."
 echo ""
