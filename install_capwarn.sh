@@ -81,5 +81,3 @@ echo ""
 echo "You are now in the CAP-Warn directory."
 echo "To complete setup run setup system, type:"
 echo "  sudo bash setup.sh"
-
-
