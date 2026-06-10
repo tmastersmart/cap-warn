@@ -1,5 +1,5 @@
 
-# CAP‑Warn  Skywarn
+# CAP‑Warn  
 ### NOAA / NWS Weather Alerts for ASL3 and AllStar — Modern Skywarn Replacement  
 
 **© 2023–2026 KJ5MZL / WRXB288 — la2way.com • lagmrs.com — All Rights Reserved.**
