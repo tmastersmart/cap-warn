@@ -14,7 +14,7 @@ echo ""
 echo "Before running setup.sh you should get a VoiceRSS API key."
 echo "Get one free at: https://www.voicerss.org/"
 echo "If you dont have one the asl3 Piper will be installed."
-echo "If you have a PI please use Voicerss.prg API Key
+echo "If you have a PI please use Voicerss.prg API Key"
 echo ""
 read -p "Press ENTER to continue... "
 echo "Thank you. Your response has been recorded on magnetic tape."
