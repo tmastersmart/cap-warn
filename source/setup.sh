@@ -10,6 +10,33 @@
 #   "Wherever you go... there you are."
 # ------------------------------------------------------------
 cd /usr/share/cap-warn
+
+# ------------------------------------------------------------
+# Random Retro Joke
+# ------------------------------------------------------------
+JOKES=(
+"Buckaroo Banzai: Wherever you go... there you are."
+"Please do not fold, spindle, or mutilate this installer"
+"Would you like to play a game?"
+"A strange game. The only winning move is not to play."
+"Game over man, game over!"
+"Hack the planet!"
+"Mess with the best, die like the rest."
+"Peace, love, and harmony."
+"Make love, not war."
+"Stay groovy, man."
+"Far out… totally far out."
+"Can you dig it?"
+"Outta sight!"
+"Keep on truckin'."
+"Good vibes only."
+"Flower power is in full bloom."
+)
+
+RANDOM_JOKE=${JOKES[$RANDOM % ${#JOKES[@]}]}
+
+
+
 #export LANG=en_US.UTF-8
 #export LC_ALL=en_US.UTF-8
 #export TERM=xterm-256color
@@ -26,9 +53,8 @@ sleep 1
 echo "LOAD \"CAP-WARN SETUP\",8,1"
 echo "SEARCHING FOR CAP-WARN SETUP"
 echo "LOADING"
-echo " "
-echo "Hang loose… CAP‑Warn is loading its cosmic subroutines."
-echo "Outta sight… CAP‑Warn is warming up.."
+sleep 1
+echo "$RANDOM_JOKE "
 echo " "
 
 # ------------------------------------------------------------
