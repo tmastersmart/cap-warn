@@ -13,3 +13,18 @@ Priority: optional
 Description: CAP-Warn Weather Alert for ASL3
  A standalone weather alert decoder and audio generator for ASL3.
 
+Package: cap-warn
+Version: 5.2.46
+Architecture: all
+Maintainer: Michael KJ5MZL la2way.com winnfreenet.com
+Depends: php-cli, php-curl, php-xml, php-mbstring, php-json, curl, sox, logrotate, asterisk-core-sounds-en-gsm
+Filename: pool/main/cap-warn_5.2.46_all.deb
+Size: 551760
+MD5sum: 0b15584a0f7b900faea3bf9e0c14b829
+SHA1: 98fe45f8e9f527bc792d602b0a46f69f404d439f
+SHA256: 8422fb575416078fd20bde06261c1a149c796360960ae2502ec2cadde7169529
+Section: utils
+Priority: optional
+Description: CAP-Warn Weather Alert for ASL3
+ A standalone weather alert decoder and audio generator for ASL3.
+
