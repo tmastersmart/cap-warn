@@ -24,7 +24,6 @@ echo " "
 echo "READY."
 sleep 1
 echo "LOAD \"CAP-WARN SETUP\",8,1"
-sleep 1
 echo "SEARCHING FOR CAP-WARN SETUP"
 echo "LOADING"
 echo " "
@@ -73,6 +72,7 @@ log "Edited $INSTALLER_VERSION Times"
 # ------------------------------------------------------------
 # Load existing config values (if present)
 # ------------------------------------------------------------
+# $specialExpand=false;  // will the expanded repeat.
 OLD_NODE=""
 OLD_TTS=""
 OLD_LAT=""
@@ -81,6 +81,7 @@ OLD_STORMRADIUS=""
 OLD_DETECTCYCLONE=""
 OLD_CYURL=""
 OLD_EXPANALERT=""
+OLD_SEXPANALERT="" 
 OLD_SLEEP=""
 OLD_HOLDTIME=""
 OLD_CRONINT=""
@@ -99,6 +100,7 @@ if [ -f "$CONFIG" ]; then
     OLD_DETECTCYCLONE=$(php -r "include '$CONFIG'; echo \$detectCyclone ?? '';")
     OLD_CYURL=$(php -r "include '$CONFIG'; echo \$cycloneURL ?? '';")
     OLD_EXPANALERT=$(php -r "include '$CONFIG'; echo \$expanAlert ?? '';")
+    OLD_SEXPANALERT=$(php -r "include '$CONFIG'; echo \$specialExpand ?? '';")
     OLD_SLEEP=$(php -r "include '$CONFIG'; echo \$sleep ?? '';")
     OLD_HOLDTIME=$(php -r "include '$CONFIG'; echo \$theHoldtime ?? '';")
     OLD_CRONINT=$(php -r "include '$CONFIG'; echo \$cronInt ?? '';")
@@ -115,7 +117,9 @@ fi
 [ -z "$OLD_SOFT" ] && OLD_SOFT="65"
 [ -z "$OLD_HOT" ] && OLD_HOT="75"
 [ -z "$OLD_HURONLY" ] && OLD_HURONLY="false"
-
+[ -z "$OLD_EXPANALERT" ] && OLD_EXPANALERT="true"
+[ -z "$OLD_SEXPANALERT" ] && OLD_SEXPANALERT="false"
+[ -z "$OLD_DETECTCYCLONE" ] && OLD_DETECTCYCLONE="false"
 # ------------------------------------------------------------
 # Detect Raspberry Pi hardware
 # ------------------------------------------------------------
@@ -334,6 +338,56 @@ log "Node number: $NODE"
 sleep 0.3   # Small delay to stabilize terminal
 
 
+# ------------------------------------------------------------
+# Combined Expanded Alert Behavior Menu
+# ------------------------------------------------------------
+
+# Determine default selection
+DEFAULT_CHOICE="1"
+if [[ "$OLD_EXPANALERT" == "true" && "$OLD_SEXPANALERT" == "false" ]]; then
+    DEFAULT_CHOICE="2"
+elif [[ "$OLD_EXPANALERT" == "true" && "$OLD_SEXPANALERT" == "true" ]]; then
+    DEFAULT_CHOICE="3"
+fi
+
+CHOICE=$(whiptail --title "Expanded Alert Behavior" --default-item "$DEFAULT_CHOICE" --menu "\
+Choose how CAP-Warn should handle expanded alert descriptions.
+
+1. Do NOT expand alerts
+   Only the short alert name is spoken (Tornado Warning, etc.)
+
+2. Expand alerts (play once)
+   CAP-Warn reads the full text description using TTS, but
+   only plays the expanded version once.
+
+3. Expand alerts AND repeat
+   CAP-Warn reads the full text description and repeats the
+   expanded version each cycle. Higher traffic on busy systems.
+
+Select your preferred behavior:" \
+29 75 10 \
+"1" "Do NOT expand alerts" \
+"2" "Expand alerts (play once)" \
+"3" "Expand alerts AND repeat" \
+3>&1 1>&2 2>&3)
+
+case "$CHOICE" in
+    1)
+        EXPANALERT=false
+        SEXPANALERT=false
+        ;;
+    2)
+        EXPANALERT=true
+        SEXPANALERT=false
+        ;;
+    3)
+        EXPANALERT=true
+        SEXPANALERT=true
+        ;;
+esac
+
+log "Expanded Alerts: $EXPANALERT, Repeat Expanded: $SEXPANALERT"
+
 
 
 # ------------------------------------------------------------
@@ -348,27 +402,25 @@ case "$OLD_CYURL" in
 esac
 
 CHOICE=$(whiptail --default-item "$DEFAULT_CHOICE" --title "Select Hurricane Feed (NHC GIS)" --menu "\
-CAP-Warn can monitor tropical systems directly from the
-National Hurricane Center (NHC). This includes tropical
-depressions, tropical storms, hurricanes, and other
-cyclone advisories. These alerts are in addition to
-your normal NWS warnings.
+CAP-Warn can monitor tropical systems from the National
+Hurricane Center (NHC), including tropical depressions,
+storms, hurricanes, and other cyclone advisories.
 
-Hurricane messages will be played once when released
-and will not repeat. Alerts are spoken at the timing
-set by the NHC, which may not align with your local
-quiet hours or system activity.
+These alerts are in addition to normal NWS warnings and
+are spoken once when released. Timing follows NHC update
+schedules and may not match local quiet hours.
 
-Recommended for nearby nodes. On busy or wide-area
-systems, this may produce more traffic than desired.
-Reduce the distance filter to limit reports.
+Recommended for nearby nodes. On wide-area systems this
+may increase traffic. Reduce the distance filter if needed.
 
-Choose the region closest to your location:" 28 79 10 \
-"1" "Atlantic/Gulf (LA TX MS AL FL GA SC NC VA MD NJ NY MA ME)" \
-"2" "Eastern Pacific (Ca, Az, Baja California, Mexico West Coast)" \
+Choose the region closest to your location:" \
+29 78 10 \
+"1" "Atlantic / Gulf (LA TX MS AL FL GA SC NC VA MD NJ NY MA ME)" \
+"2" "Eastern Pacific (CA AZ Baja California Mexico West Coast)" \
 "3" "Central Pacific (Hawaii region)" \
 "0" "Disable hurricane detection" \
-2>&1 1>&3)
+3>&1 1>&2 2>&3)
+
 
 
 case $CHOICE in
@@ -419,36 +471,9 @@ fi
 
 log "Hurricane only: $REPORT_HURRICANE_ONLY"
 
+sleep 0.3   # Small delay to stabilize terminal
 
 
-
-# ------------------------------------------------------------
-# Expanded Alert Descriptions
-# ------------------------------------------------------------
-if [[ "$OLD_EXPANALERT" == "true" ]]; then
-    DEFAULT="--defaultyes"
-else
-    DEFAULT="--defaultno"
-fi
-
-whiptail $DEFAULT --yesno "\
-Enable expanded alert descriptions?
-
-CAP-Warn normally plays a alert headline phrase for most
-NWS alert types (Tornado Warning, Severe Thunderstorm,
-Flash Flood, etc.). If you enable this option, CAP-Warn
-will also read the full text description using text-to-
-speech (TTS) for those alerts.
-
-Special Weather Statements (SWS) are ALWAYS expanded
-because their content varies widely and cannot use a
-standard sound.
-
-Enable expanded descriptions for all other alerts?" \
-14 70 --title "Expanded Alert Details"
-
-EXPANALERT=$([ $? -eq 0 ] && echo true || echo false)
-log "Expand alerts: $EXPANALERT"
 
 # ------------------------------------------------------------
 # Quiet Hours
@@ -614,6 +639,7 @@ Hurricane Detection:  $DETECTCYCLONE ($CYURL)
 Storm Radius:         $STORMRADIUS miles
 Hurricane Only:       $REPORT_HURRICANE_ONLY
 Expanded Alerts:      $EXPANALERT
+Repeat Exp Alerts:   $SEXPANALERT
 Quiet Hours:          $SLEEP
 Hold Time:            $HOLDTIME minutes
 Cron Interval:        $CRONINT minutes
@@ -632,7 +658,7 @@ else
 fi
 
 
-
+# $specialExpand=false;  // will the expanded repeat.
 # ------------------------------------------------------------
 # Write config.php
 # ------------------------------------------------------------
@@ -660,6 +686,7 @@ cat > "$CONFIG" <<EOF
 \$cycloneURL        = "$CYURL";
 \$hurOnly           = $REPORT_HURRICANE_ONLY;
 \$expanAlert        = $EXPANALERT;
+\$specialExpand     = $SEXPANALERT;
 \$sleep             = $SLEEP;
 \$theHoldtime       = $HOLDTIME;
 \$cronInt           = $CRONINT;

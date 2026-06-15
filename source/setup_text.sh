@@ -99,6 +99,7 @@ if [ "$LOAD_OLD" = true ]; then
     OLD_DETECTCYCLONE=$(php -r "include '$CONFIG'; echo \$detectCyclone ?? '';")
     OLD_CYURL=$(php -r "include '$CONFIG'; echo \$cycloneURL ?? '';")
     OLD_EXPANALERT=$(php -r "include '$CONFIG'; echo \$expanAlert ?? '';")
+    OLD_SEXPANALERT=$(php -r "include '$CONFIG'; echo \$specialExpand ?? '';")
     OLD_SLEEP=$(php -r "include '$CONFIG'; echo \$sleep ?? '';")
     OLD_HOLDTIME=$(php -r "include '$CONFIG'; echo \$theHoldtime ?? '';")
     OLD_CRONINT=$(php -r "include '$CONFIG'; echo \$cronInt ?? '';")
@@ -115,7 +116,8 @@ else
     OLD_STORMRADIUS="1000"
     OLD_DETECTCYCLONE="false"
     OLD_CYURL="disabled"
-    OLD_EXPANALERT="false"
+    OLD_EXPANALERT="true"
+    OLD_SEXPANALERT="false"
     OLD_SLEEP="false"
     OLD_HOLDTIME="25"
     OLD_CRONINT="13"
@@ -125,13 +127,23 @@ else
     OLD_HURONLY="false"
 fi
 
+# Smart defaults when missing
+[ -z "$OLD_STORMRADIUS" ] && OLD_STORMRADIUS="1000"
+[ -z "$OLD_HOLDTIME" ] && OLD_HOLDTIME="25"
+[ -z "$OLD_CRONINT" ] && OLD_CRONINT="13"
+[ -z "$OLD_SOFT" ] && OLD_SOFT="65"
+[ -z "$OLD_HOT" ] && OLD_HOT="75"
+[ -z "$OLD_HURONLY" ] && OLD_HURONLY="false"
+[ -z "$OLD_EXPANALERT" ] && OLD_EXPANALERT="true"
+[ -z "$OLD_SEXPANALERT" ] && OLD_SEXPANALERT="false"
 
 echo ""
 echo "CAP-WARN SETUP"
 echo "---------------"
 
-read -p "Enter VoiceRSS API Key (blank = offline TTS): " TTSKEY
-log "TTS key: $TTSKEY"
+read -p "Enter VoiceRSS API Key (blank = offline TTS)[$OLD_TTS]: " TTSKEY
+TTS=${TTS:-$OLD_TTS}
+log "TTS key: $TTS"
 
 echo ""
 echo "Enter Latitude and Longitude "
@@ -193,6 +205,14 @@ else
 fi
 
 echo ""
+read -p "Repeate Expanded alerts? (y/n) [$SOLD_EXPANALERT]: " EA
+if [[ "$EA" =~ ^[Yy]$ ]]; then
+    SEXPANALERT=true
+else
+    SEXPANALERT=false
+fi
+
+echo ""
 read -p "Enable Quiet Hours 1AM–6AM? (y/n) [$OLD_SLEEP]: " QS
 if [[ "$QS" =~ ^[Yy]$ ]]; then
     SLEEP=true
@@ -243,11 +263,12 @@ echo "============================================================"
 echo "Node Number:          $NODE"
 echo "Latitude:             $LAT"
 echo "Longitude:            $LON"
-echo "VoiceRSS Key:         ${TTSKEY:-None (offline TTS)}"
+echo "VoiceRSS Key:         ${TTS:-None (offline TTS)}"
 echo "Hurricane Detection:  $DETECTCYCLONE ($CYURL)"
 echo "Storm Radius:         $STORMRADIUS miles"
 echo "Hurricane Only:       $REPORT_HURRICANE_ONLY"
 echo "Expanded Alerts:      $EXPANALERT"
+echo "Repeate Exp Alerts:   $SEXPANALERT"
 echo "Quiet Hours:          $SLEEP"
 echo "Hold Time:            $HOLDTIME minutes"
 echo "Cron Interval:        $CRONINT minutes"
@@ -266,14 +287,14 @@ if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
     exit 0
 fi
 
-echo "Saving configuration..."
+
 
 echo "Saving configuration..."
 
 sudo tee "$CONFIG" >/dev/null <<EOF
 <?php
 \$node="$NODE";
-\$tts="$TTSKEY";
+\$tts="$TTS";
 \$lat="$LAT";
 \$lon="$LON";
 \$stormRadiusMiles=$STORMRADIUS;
@@ -281,6 +302,7 @@ sudo tee "$CONFIG" >/dev/null <<EOF
 \$cycloneURL="$CYURL";
 \$hurOnly=$REPORT_HURRICANE_ONLY;
 \$expanAlert=$EXPANALERT;
+\$specialExpand     = $SEXPANALERT;
 \$sleep=$SLEEP;
 \$theHoldtime=$HOLDTIME;
 \$cronInt=$CRONINT;
