@@ -1,19 +1,4 @@
 Package: cap-warn
-Version: 5.2.45
-Architecture: all
-Maintainer: Michael KJ5MZL la2way.com winnfreenet.com
-Depends: php-cli, php-curl, php-xml, php-mbstring, php-json, curl, sox, logrotate, asterisk-core-sounds-en-gsm
-Filename: pool/main/cap-warn_5.2.45_all.deb
-Size: 551672
-MD5sum: e70b73e7cf794b7789dbb7f5b7fb4be7
-SHA1: b57a7bec498fd210b69c2cf833e3e9d50b09d7cb
-SHA256: 1550c97bdc5c21c7192eb457fce732e222cd72891a5dd3a2cfca4d14695d8e71
-Section: utils
-Priority: optional
-Description: CAP-Warn Weather Alert for ASL3
- A standalone weather alert decoder and audio generator for ASL3.
-
-Package: cap-warn
 Version: 5.2.46
 Architecture: all
 Maintainer: Michael KJ5MZL la2way.com winnfreenet.com
@@ -23,6 +8,21 @@ Size: 551760
 MD5sum: 0b15584a0f7b900faea3bf9e0c14b829
 SHA1: 98fe45f8e9f527bc792d602b0a46f69f404d439f
 SHA256: 8422fb575416078fd20bde06261c1a149c796360960ae2502ec2cadde7169529
+Section: utils
+Priority: optional
+Description: CAP-Warn Weather Alert for ASL3
+ A standalone weather alert decoder and audio generator for ASL3.
+
+Package: cap-warn
+Version: 5.2.47
+Architecture: all
+Maintainer: Michael KJ5MZL la2way.com winnfreenet.com
+Depends: php-cli, php-curl, php-xml, php-mbstring, php-json, curl, sox, logrotate, asterisk-core-sounds-en-gsm
+Filename: pool/main/cap-warn_5.2.47_all.deb
+Size: 551880
+MD5sum: 8c6f135deca169d41ac16e500910acbb
+SHA1: b574ec65f2a4ad54a0017fa5cea4bc9d506ffdfc
+SHA256: f77634e9a5ff1249f70799558273d01b5db8e52839f29be6ce1792a006705958
 Section: utils
 Priority: optional
 Description: CAP-Warn Weather Alert for ASL3
