@@ -1,6 +1,6 @@
 #!/bin/bash
 # ------------------------------------------------------------
-# CAP-Warn Setup Utility
+# CAP-Warn Setup Utility v2
 # ------------------------------------------------------------
 # This setup program configures CAP-Warn for your node.
 # In the spirit of 1960s computer rooms:
@@ -16,19 +16,19 @@ cd /usr/share/cap-warn
 # ------------------------------------------------------------
 JOKES=(
 "Buckaroo Banzai: Wherever you go... there you are."
-"Please do not fold, spindle, or mutilate this installer"
+"Please do not fold spindle, or mutilate this installer"
 "Would you like to play a game?"
 "A strange game. The only winning move is not to play."
-"Game over man, game over!"
+"Game over man game over!"
 "Hack the planet!"
 "Mess with the best, die like the rest."
-"Peace, love, and harmony."
-"Make love, not war."
+"Peace love and harmony."
+"Make love not war."
 "Stay groovy, man."
-"Far out… totally far out."
+"Far out totally far out."
 "Can you dig it?"
 "Outta sight!"
-"Keep on truckin'."
+"Keep on truckin."
 "Good vibes only."
 "Flower power is in full bloom."
 )
@@ -99,8 +99,13 @@ log "Edited $INSTALLER_VERSION Times"
 # Load existing config values (if present)
 # ------------------------------------------------------------
 # $specialExpand=false;  // will the expanded repeat.
+#    $user_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';  // Replace with your Pushover User Key
+#    $api_token = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';  // Replace with your Pushover API Token
+OLD_PUSHKEY=""
+OLD_PUSHTOKEN=""
+OLD_NOTIFYMODE=""
 OLD_NODE=""
-OLD_TTS=""
+OLD_TTSKEY=""
 OLD_LAT=""
 OLD_LON=""
 OLD_STORMRADIUS=""
@@ -119,7 +124,7 @@ OLD_HURONLY=""
 if [ -f "$CONFIG" ]; then
     log "Loading existing configuration from $CONFIG"
     OLD_NODE=$(php -r "include '$CONFIG'; echo \$node ?? '';")
-    OLD_TTS=$(php -r "include '$CONFIG'; echo \$tts ?? '';")
+    OLD_TTSKEY=$(php -r "include '$CONFIG'; echo \$tts ?? '';")
     OLD_LAT=$(php -r "include '$CONFIG'; echo \$lat ?? '';")
     OLD_LON=$(php -r "include '$CONFIG'; echo \$lon ?? '';")
     OLD_STORMRADIUS=$(php -r "include '$CONFIG'; echo \$stormRadiusMiles ?? '';")
@@ -134,6 +139,11 @@ if [ -f "$CONFIG" ]; then
     OLD_SOFT=$(php -r "include '$CONFIG'; echo \$soft ?? '';")
     OLD_HOT=$(php -r "include '$CONFIG'; echo \$hot ?? '';")
     OLD_HURONLY=$(php -r "include '$CONFIG'; echo \$hurOnly ?? '';")
+    OLD_NOTIFYMODE=$(php -r "include '$CONFIG'; echo \$pushNotify?? '';")
+    OLD_PUSHKEY=$(php -r "include '$CONFIG'; echo \$user_key?? '';")
+    OLD_PUSHTOKEN=$(php -r "include '$CONFIG'; echo \$api_token ?? '';")
+    
+    
 fi
 
 # Smart defaults when missing
@@ -146,6 +156,26 @@ fi
 [ -z "$OLD_EXPANALERT" ] && OLD_EXPANALERT="true"
 [ -z "$OLD_SEXPANALERT" ] && OLD_SEXPANALERT="false"
 [ -z "$OLD_DETECTCYCLONE" ] && OLD_DETECTCYCLONE="false"
+
+
+# Normalize PHP boolean output for all boolean config vars
+normalize_bool() {
+    local val="$1"
+    if [[ "$val" == "1" ]]; then
+        echo "true"
+    else
+        echo "false"
+    fi
+}
+
+OLD_DETECTCYCLONE=$(normalize_bool "$OLD_DETECTCYCLONE")
+OLD_HURONLY=$(normalize_bool "$OLD_HURONLY")
+OLD_EXPANALERT=$(normalize_bool "$OLD_EXPANALERT")
+OLD_SEXPANALERT=$(normalize_bool "$OLD_SEXPANALERT")
+OLD_SLEEP=$(normalize_bool "$OLD_SLEEP")
+OLD_PIALARMS=$(normalize_bool "$OLD_PIALARMS")
+
+
 # ------------------------------------------------------------
 # Detect Raspberry Pi hardware
 # ------------------------------------------------------------
@@ -263,7 +293,7 @@ log "Displayed TTS engine information."
 # TTS API Key (Optional)
 # ------------------------------------------------------------
 TTSKEY=$(whiptail --inputbox "Enter your VoiceRSS API key (leave blank for asl-tts):" \
-10 70 "$OLD_TTS" --title "VoiceRSS API Key (Optional)" 2>&1 1>&3)
+10 70 "$OLD_TTSKEY" --title "VoiceRSS API Key (Optional)" 2>&1 1>&3)
 log "TTS API key entered (blank means offline mode). $TTSKEY"
 
 
@@ -276,7 +306,7 @@ fi
 
 if [ "$piSystem" = true ] && [ -z "$TTSKEY" ]; then
     whiptail --title "WARNING: Local TTS Performance" \
-    --yesno "No VoiceRSS API key detected.\n\nUsing locally generated TTS audio on a Raspberry Pi may cause:\n\n • 100% CPU usage\n • Audio dropouts\n • Jitter on RF output\n\nIt is strongly recommended to use VoiceRSS instead.\n\nDo you want to continue anyway?" 18 70
+    --yesno "No VoiceRSS API key detected.\n\nUsing locally generated TTS audio on a Raspberry Pi may cause:\n\n - 100% CPU usage\n - Audio dropouts\n - Jitter on RF output\n\nIt is strongly recommended to use VoiceRSS instead.\n\nDo you want to continue anyway?" 18 70
 
     if [ $? -ne 0 ]; then
         echo "User cancelled due to TTS warning. Exiting installer."
@@ -414,6 +444,18 @@ esac
 
 log "Expanded Alerts: $EXPANALERT, Repeat Expanded: $SEXPANALERT"
 
+PUSHKEY=$(whiptail --inputbox "Pushover is an instant notification service used to send alerts to your phone.\n\nEnter your *Pushover User Key*. from https://pushover.net/\n\nLeave this blank to disable Pushover notifications." 15 70 "$OLD_PUSHKEY" --title "Pushover User Key" 3>&1 1>&2 2>&3)
+
+if [ $? -ne 0 ]; then
+    echo "User cancelled."
+    exit 1
+fi
+PUSHTOKEN=$(whiptail --inputbox "Cap-Warn needs its own *Pushover API Token*.\n\nTo create one:\n1. Log in at https://pushover.net/\n2. Go to 'Create an Application/API Token'\n3. Copy the API Token here.\n\nLeave blank to cancel." 18 70 "$OLD_PUSHTOKEN" --title "Pushover API Token" 3>&1 1>&2 2>&3)
+
+if [ $? -ne 0 ]; then
+    echo "User cancelled."
+    exit 1
+fi
 
 
 # ------------------------------------------------------------
@@ -593,8 +635,8 @@ Raspberry Pi alarms are currently ENABLED.
 
 NOTE:
 This feature is recommended for local Pi-based nodes.
-It may cause excessive alarm traffic on distant repeaters.
-A limiter will be added in a future version.
+It has a limiter to prevent to many alerts but you can
+set it to only send Pushover events.
 
 Would you like to keep them enabled?" \
         18 70
@@ -610,8 +652,8 @@ Would you like to enable the following alarms?
  
 NOTE:
 This feature is recommended for local Pi-based nodes.
-It may cause excessive alarm traffic on distant repeaters.
-A limiter will be added in a future version.
+It has a limiter to stop exessive alerts and you may set
+it to only send Pushover alerts only.
 
 Recommended for Raspberry Pi nodes." \
         18 70
@@ -650,30 +692,62 @@ fi
 
 log "Pi alarms: $piAlarms, soft: $piSoftTemp, hot: $piHotTemp"
 
+# If Pushover keys exist
+if [ -n "$PUSHKEY" ] && [ -n "$PUSHTOKEN" ]; then
+
+    # If Pi alarms are OFF → force ALL
+    if [ "$PIALARMS" != "true" ]; then
+        NOTIFYMODE="all"
+
+    else
+        # Pi alarms ON → show menu
+        DEFAULT_MODE="${OLD_NOTIFYMODE:-all}"
+
+        NOTIFYMODE=$(whiptail --title "Notification Options" --menu \
+"Choose how you want to receive alerts.\n\nAll Alerts = Weather + Pi alerts (voice + Pushover)\nPi Alerts Only = Only Pi temp/undervoltage\nPushover Only = Pi alerts sent silently to phone\n" \
+15 70 5 \
+"all"        "1) All alerts by Voice + Pushover" \
+"pi_both"    "2) Pi Temp/UV only (Voice + Pushover)" \
+"pi_pushover" "3) Pi Temp/UV only (Pushover only, no voice)" \
+3>&1 1>&2 2>&3)
+
+        if [ $? -ne 0 ]; then
+            echo "User cancelled."
+            exit 1
+        fi
+    fi
+
+else
+    # No Pushover keys → default to ALL
+    NOTIFYMODE="all"
+fi
+
+TODAY=$(date +"%m-%d-%Y")
+
 
 # ================================================================
 # FINAL CONFIRMATION SCREEN
 # ================================================================
-if whiptail --title "CAP-Warn Configuration Summary" --yesno "\
+if whiptail --title "CAP-Warn Configuration Summary $TODAY" --yesno "\
 Ready to save the following configuration:
 
 Node Number:          $NODE
-Latitude:             $LAT
-Longitude:            $LON
+Lat Lon:              $LAT / $LON
 VoiceRSS Key:         ${TTSKEY:-(None - using offline TTS)}
 Hurricane Detection:  $DETECTCYCLONE ($CYURL)
 Storm Radius:         $STORMRADIUS miles
 Hurricane Only:       $REPORT_HURRICANE_ONLY
 Expanded Alerts:      $EXPANALERT
-Repeat Exp Alerts:   $SEXPANALERT
+Repeat Exp Alerts:    $SEXPANALERT
 Quiet Hours:          $SLEEP
 Hold Time:            $HOLDTIME minutes
 Cron Interval:        $CRONINT minutes
-
 Raspberry Pi Alarms:  $piAlarms
-  Soft Warning:       $piSoftTemp°C
-  Critical:           $piHotTemp°C
-
+  Soft Warning:       $piSoftTemp C
+  Critical:           $piHotTemp C
+Pushover KEY          $PUSHKEY
+Pushover TOKEN        $PUSHTOKEN
+Pushover Mode         $NOTIFYMODE
 Press YES to save and continue.
 Press NO to abort." 25 78
 then
@@ -699,9 +773,14 @@ cat > "$CONFIG" <<EOF
 // Running setup.sh again will update these values using
 // your previous configuration as defaults.
 //
+// Experts may edit advanced_config.php for test but that may get 
+// Overiden on updates it is not expected to be edited. It contains
+// expert settings and will be used to set defaults for new options
+//
 // System detected: $piVersion
-// Installer version: $INSTALLER_VERSION
+// Installer version: $INSTALLER_VERSION $TODAY
 // ------------------------------------------------------------
+\$editDate          = "$TODAY";
 \$installerVer      = "$INSTALLER_VERSION";
 \$node              = "$NODE";
 \$tts               = "$TTSKEY";
@@ -716,6 +795,9 @@ cat > "$CONFIG" <<EOF
 \$sleep             = $SLEEP;
 \$theHoldtime       = $HOLDTIME;
 \$cronInt           = $CRONINT;
+\$user_key          = "$PUSHKEY";
+\$api_token         = "$PUSHTOKEN";
+\$pushNotify        = "$NOTIFYMODE"; // all pi-both pi-pushover
 
 // Raspberry Pi temperature alarms
 \$piAlarms = $piAlarms;
@@ -786,5 +868,5 @@ echo "As they used to say back in the '60s:"
 echo "   \"Keep on truckin'... the weather waits for no one.\""
 echo "============================================================"
 echo ""
-
+echo "RANDOM_JOKE $RANDOM_JOKE"
 log "===== INSTALLER COMPLETE ====="

@@ -3,7 +3,7 @@ cd /usr/share/cap-warn
 
 echo ""
 echo "============================================================"
-echo " CAP-WARN SETUP — TEXT MODE HELP"
+echo " CAP-WARN SETUP — TEXT MODE HELP v2"
 echo "============================================================"
 echo ""
 echo "This setup program will guide you through configuring:"
@@ -62,37 +62,37 @@ fi
 echo "Detected system: $piVersion"
 log "Detected system: $piVersion"
 
-
-
-
-
-# ------------------------------------------------------------
-# Detect if config.php is valid before loading
-# ------------------------------------------------------------
 CONFIG="/etc/cap-warn/config.php"
-
-LOAD_OLD=false
+# ------------------------------------------------------------
+# Load existing config values (if present)
+# ------------------------------------------------------------
+# $specialExpand=false;  // will the expanded repeat.
+#    $user_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';  // Replace with your Pushover User Key
+#    $api_token = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';  // Replace with your Pushover API Token
+OLD_PUSHKEY=""
+OLD_PUSHTOKEN=""
+OLD_NOTIFYMODE=""
+OLD_NODE=""
+OLD_TTSKEY=""
+OLD_LAT=""
+OLD_LON=""
+OLD_STORMRADIUS=""
+OLD_DETECTCYCLONE=""
+OLD_CYURL=""
+OLD_EXPANALERT=""
+OLD_SEXPANALERT="" 
+OLD_SLEEP=""
+OLD_HOLDTIME=""
+OLD_CRONINT=""
+OLD_PIALARMS=""
+OLD_SOFT=""
+OLD_HOT=""
+OLD_HURONLY=""  
 
 if [ -f "$CONFIG" ]; then
-    # Try reading the first variable safely
-    TESTVAL=$(php -r "include '$CONFIG'; echo isset(\$node) ? 'OK' : 'BAD';" 2>/dev/null)
-
-    if [ "$TESTVAL" = "OK" ]; then
-        LOAD_OLD=true
-        log "Existing config.php is valid. Loading previous values."
-    else
-        log "Existing config.php is invalid or empty. Skipping load."
-    fi
-else
-    log "No config.php found. Fresh install."
-fi
-
-
-
-
-if [ "$LOAD_OLD" = true ]; then
+    log "Loading existing configuration from $CONFIG"
     OLD_NODE=$(php -r "include '$CONFIG'; echo \$node ?? '';")
-    OLD_TTS=$(php -r "include '$CONFIG'; echo \$tts ?? '';")
+    OLD_TTSKEY=$(php -r "include '$CONFIG'; echo \$tts ?? '';")
     OLD_LAT=$(php -r "include '$CONFIG'; echo \$lat ?? '';")
     OLD_LON=$(php -r "include '$CONFIG'; echo \$lon ?? '';")
     OLD_STORMRADIUS=$(php -r "include '$CONFIG'; echo \$stormRadiusMiles ?? '';")
@@ -107,24 +107,11 @@ if [ "$LOAD_OLD" = true ]; then
     OLD_SOFT=$(php -r "include '$CONFIG'; echo \$soft ?? '';")
     OLD_HOT=$(php -r "include '$CONFIG'; echo \$hot ?? '';")
     OLD_HURONLY=$(php -r "include '$CONFIG'; echo \$hurOnly ?? '';")
-else
-    # Fresh install defaults
-    OLD_NODE=""
-    OLD_TTS=""
-    OLD_LAT=""
-    OLD_LON=""
-    OLD_STORMRADIUS="1000"
-    OLD_DETECTCYCLONE="false"
-    OLD_CYURL="disabled"
-    OLD_EXPANALERT="true"
-    OLD_SEXPANALERT="false"
-    OLD_SLEEP="false"
-    OLD_HOLDTIME="25"
-    OLD_CRONINT="13"
-    OLD_PIALARMS="false"
-    OLD_SOFT="65"
-    OLD_HOT="75"
-    OLD_HURONLY="false"
+    OLD_NOTIFYMODE=$(php -r "include '$CONFIG'; echo \$pushNotify?? '';")
+    OLD_PUSHKEY=$(php -r "include '$CONFIG'; echo \$user_key?? '';")
+    OLD_PUSHTOKEN=$(php -r "include '$CONFIG'; echo \$api_token ?? '';")
+    
+    
 fi
 
 # Smart defaults when missing
@@ -136,14 +123,52 @@ fi
 [ -z "$OLD_HURONLY" ] && OLD_HURONLY="false"
 [ -z "$OLD_EXPANALERT" ] && OLD_EXPANALERT="true"
 [ -z "$OLD_SEXPANALERT" ] && OLD_SEXPANALERT="false"
+[ -z "$OLD_DETECTCYCLONE" ] && OLD_DETECTCYCLONE="false"
+
+
+# Normalize PHP boolean output for all boolean config vars
+normalize_bool() {
+    local val="$1"
+    if [[ "$val" == "1" ]]; then
+        echo "true"
+    else
+        echo "false"
+    fi
+}
+
+OLD_DETECTCYCLONE=$(normalize_bool "$OLD_DETECTCYCLONE")
+OLD_HURONLY=$(normalize_bool "$OLD_HURONLY")
+OLD_EXPANALERT=$(normalize_bool "$OLD_EXPANALERT")
+OLD_SEXPANALERT=$(normalize_bool "$OLD_SEXPANALERT")
+OLD_SLEEP=$(normalize_bool "$OLD_SLEEP")
+OLD_PIALARMS=$(normalize_bool "$OLD_PIALARMS")
+
+
+
+# ------------------------------------------------------------
+# Auto-increment installer version (persists forever)
+# ------------------------------------------------------------
+SETUPVERFILE="/usr/share/cap-warn/setup_version.txt"
+
+if [ ! -f "$SETUPVERFILE" ]; then
+    echo "1" > "$SETUPVERFILE"
+fi
+
+SETUPVER=$(cat "$SETUPVERFILE")
+NEWSETUPVER=$((SETUPVER + 1))
+echo "$NEWSETUPVER" > "$SETUPVERFILE"
+INSTALLER_VERSION="$NEWSETUPVER"
+log "Edited $INSTALLER_VERSION Times"
+
+
 
 echo ""
 echo "CAP-WARN SETUP"
 echo "---------------"
 
-read -p "Enter VoiceRSS API Key (blank = offline TTS)[$OLD_TTS]: " TTSKEY
-TTS=${TTS:-$OLD_TTS}
-log "TTS key: $TTS"
+read -p "Enter VoiceRSS API Key (blank = offline TTS)[$OLD_TTSKEY]: " TTSKEY
+TTSKEY=${TTSKEY:-$OLD_TTSKEY}
+log "TTS key: $TTSKEY"
 
 echo ""
 echo "Enter Latitude and Longitude "
@@ -256,6 +281,56 @@ else
 fi
 
 
+
+
+# Normalize booleans
+[[ "$OLD_PIALARMS" == "1" ]] && OLD_PIALARMS="true"
+[[ -z "$OLD_PIALARMS" ]] && OLD_PIALARMS="false"
+
+# Ask for Pushover User Key
+read -p "Enter Pushover User Key (blank to disable) [$OLD_PUSHKEY]: " PUSHKEY
+[[ -z "$PUSHKEY" ]] && PUSHKEY="$OLD_PUSHKEY"
+
+# Ask for Pushover API Token
+read -p "Enter Pushover API Token (blank to disable) [$OLD_PUSHTOKEN]: " PUSHTOKEN
+[[ -z "$PUSHTOKEN" ]] && PUSHTOKEN="$OLD_PUSHTOKEN"
+
+# Decide whether to ask for notification mode
+if [[ -n "$PUSHKEY" && -n "$PUSHTOKEN" ]]; then
+
+    if [[ "$OLD_PIALARMS" == "true" ]]; then
+        # Pi alarms enabled → ask user
+        echo ""
+        echo "Notification Mode Options:"
+        echo "  1) All alerts: Voice + Pushover"
+        echo "  2) Pi Temp/UV only: Voice + Pushover"
+        echo "  3) Pi Temp/UV only: Pushover only"
+        echo ""
+
+        read -p "Choose notification mode [1-3] (current: $OLD_NOTIFYMODE): " MODE
+
+        case "$MODE" in
+            1) NOTIFYMODE="all" ;;
+            2) NOTIFYMODE="pi_both" ;;
+            3) NOTIFYMODE="pi_pushover" ;;
+            *) NOTIFYMODE="$OLD_NOTIFYMODE" ;;
+        esac
+
+    else
+        # Pi alarms OFF → default to ALL
+        NOTIFYMODE="all"
+    fi
+
+else
+    # No Pushover keys → no mode needed
+    NOTIFYMODE="$OLD_NOTIFYMODE"
+fi
+
+
+
+
+TODAY=$(date +"%m-%d-%Y")
+
 echo ""
 echo "============================================================"
 echo " CAP-WARN CONFIGURATION SUMMARY"
@@ -263,7 +338,7 @@ echo "============================================================"
 echo "Node Number:          $NODE"
 echo "Latitude:             $LAT"
 echo "Longitude:            $LON"
-echo "VoiceRSS Key:         ${TTS:-None (offline TTS)}"
+echo "VoiceRSS Key:         ${TTSKEY:-(None - using offline TTS)}"
 echo "Hurricane Detection:  $DETECTCYCLONE ($CYURL)"
 echo "Storm Radius:         $STORMRADIUS miles"
 echo "Hurricane Only:       $REPORT_HURRICANE_ONLY"
@@ -276,6 +351,9 @@ echo ""
 echo "Raspberry Pi Alarms:  $piAlarms"
 echo "  Soft Warning:       $piSoftTemp C"
 echo "  Critical Alarm:     $piHotTemp C"
+echo "Pushover KEY          $PUSHKEY"
+echo "Pushover TOKEN        $PUSHTOKEN"
+echo "Pushover Mode         $NOTIFYMODE"
 echo "============================================================"
 echo ""
 
@@ -293,22 +371,43 @@ echo "Saving configuration..."
 
 sudo tee "$CONFIG" >/dev/null <<EOF
 <?php
-\$node="$NODE";
-\$tts="$TTS";
-\$lat="$LAT";
-\$lon="$LON";
-\$stormRadiusMiles=$STORMRADIUS;
-\$detectCyclone=$DETECTCYCLONE;
-\$cycloneURL="$CYURL";
-\$hurOnly=$REPORT_HURRICANE_ONLY;
-\$expanAlert=$EXPANALERT;
+// ------------------------------------------------------------
+// CAP-Warn Configuration File
+// ------------------------------------------------------------
+// This file is generated automatically by setup.sh.
+// Running setup.sh again will update these values using
+// your previous configuration as defaults.
+//
+// Experts may edit advanced_config.php for test but that may get 
+// Overiden on updates it is not expected to be edited. It contains
+// expert settings and will be used to set defaults for new options
+//
+// System detected: $piVersion
+// Installer version: Text editor $INSTALLER_VERSION $TODAY
+// ------------------------------------------------------------
+\$editDate          = "$TODAY";
+\$installerVer      = "$INSTALLER_VERSION";
+\$node              = "$NODE";
+\$tts               = "$TTSKEY";
+\$lat               = "$LAT";
+\$lon               = "$LON";
+\$stormRadiusMiles  = $STORMRADIUS;
+\$detectCyclone     = $DETECTCYCLONE;
+\$cycloneURL        = "$CYURL";
+\$hurOnly           = $REPORT_HURRICANE_ONLY;
+\$expanAlert        = $EXPANALERT;
 \$specialExpand     = $SEXPANALERT;
-\$sleep=$SLEEP;
-\$theHoldtime=$HOLDTIME;
-\$cronInt=$CRONINT;
-\$piAlarms=$piAlarms;
-\$soft=$piSoftTemp;
-\$hot=$piHotTemp;
+\$sleep             = $SLEEP;
+\$theHoldtime       = $HOLDTIME;
+\$cronInt           = $CRONINT;
+\$user_key          = "$PUSHKEY";
+\$api_token         = "$PUSHTOKEN";
+\$pushNotify        = "$NOTIFYMODE"; // all pi-both pi-pushover
+
+// Raspberry Pi temperature alarms
+\$piAlarms = $piAlarms;
+\$soft     = $piSoftTemp;   // Soft warning temperature
+\$hot      = $piHotTemp;    // Critical temperature
 ?>
 EOF
 
