@@ -13,7 +13,7 @@ scripts. (c)2023/2026
 They were all based on a weather program I wrote is 2018
 https://pws.winnfreenet.com
 To post weather to Citizens Weather Observation Program 
-(c)2018/2026
+(c)2015/2026
 
 CAP-Warn-Weather is a complete redesign and modernization of that
 earlier system, but it continues the same core concepts, alert handling
