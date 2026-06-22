@@ -1,0 +1,79 @@
+CAP-Warn-Weather – Deployment & Source Information
+--------------------------------------------------
+
+This project is based on earlier work originally developed for the
+GMRS Live program and the first CAP-Warn system released in 2023. The
+original codebase is archived here:
+
+https://github.com/tmastersmart/gmrs_live/tree/main
+
+CAP-Warn-Weather is a complete redesign and modernization of that
+earlier system, but it continues the same core concepts, alert handling
+logic, and overall philosophy established in the GMRS Live era.
+
+Because of this history, CAP-Warn-Weather contains many evolved
+components that do not appear in the GitHub source directory. These
+include PHP runtime code, JavaScript, CSS, sound files, configuration
+files, and other internal logic that has been rewritten and improved
+over time.
+
+These runtime files change frequently as the project evolves. Sound
+files may be updated or replaced, and configuration files may be
+adjusted to support new features or alert types. These updates occur
+inside the .deb package and do not appear in the GitHub source tree.
+
+This is normal and intentional.
+
+Manual Deployment Process:
+--------------------------
+All CAP-Warn-Weather deployments are performed manually. There is no
+automated build pipeline. The developer writes the code, prepares the
+package, and deploys it by hand. This workflow follows custom rules and
+methods unique to this project and will not resemble the deployment
+process used by other developers or organizations.
+
+Because the deployment process is manual and the runtime code is stored
+inside the .deb package, it is normal for new releases to appear even
+when the GitHub source directory has not changed. Every deployment
+contains real updates, even if those updates are not visible in the
+public repository.
+
+Why the GitHub source directory may not change:
+-----------------------------------------------
+The GitHub repository stores only the Debian packaging files:
+- debian/control
+- debian/changelog
+- debian/install
+- installer scripts
+- wrapper files
+
+These files rarely need modification.
+
+The actual program code, sound assets, and configuration files are stored
+inside the .deb package itself and are updated independently of the
+packaging metadata. This allows the project to update internal logic,
+fix bugs, add features, refresh sound files, or adjust configuration
+behavior without requiring visible changes to the GitHub source tree.
+
+Why deploys still occur:
+------------------------
+Every deployment includes updated runtime code, sound files, or
+configuration files inside the .deb package. Even if the GitHub source
+directory appears unchanged, the .deb itself contains new or modified
+content. All deploys represent real updates to the software.
+
+This is the same model used by many commercial and closed-source Debian
+packages, where the packaging metadata is public but the runtime code
+and assets are distributed only inside the .deb.
+
+Summary:
+--------
+- CAP-Warn-Weather is the successor to GMRS Live and CAP-Warn (2023).
+- The GitHub repo contains packaging files, not the full program.
+- The .deb contains the actual runtime code, sound files, and configs.
+- The .deb will always include files not visible in the repo.
+- All deployments are done manually using custom rules.
+- Deploys are real even when the GitHub source tree does not change.
+- This is a normal and valid Debian packaging workflow.
+
+
