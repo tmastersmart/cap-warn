@@ -1,4 +1,5 @@
-v1-3 internal beta testing in 2023
+Version release file. 
+v1-3 internal beta testing in 2023 No comments were kept before the v3 release 
  v3.4     10/05/2023   Major changes to weather API
  v3.5     10/14/2023   FEMAQ added. later removed
  v3.6     10/21/2023   Muting adjustments
@@ -21,7 +22,9 @@ v1-3 internal beta testing in 2023
 5.2.29 2026-06-06 19:57:54 Testing deploy system (many changes during deploy setup didnt keep track sorry)
 5.2.30 2026-06-09 00:30:19 Added GPS system. Moved sound into modules for code sharing
 5.2.42 2026-06-15 13:36:26 Option to skip expanded alerts. Product ID added for later use. Minor tweeks in sounds and a slight bug in $out not defined
+5.2.43 - 47     Lots of changes in the code to prevent spamming of alerts temp alarms low voltage alarms and max counters per day -  didnt keep track 
 5.2.48 2026-06-15 19:17:54 Pushover included but not finished
+5.2.49 2026-06-15 19:17:54 Bug detected in the temp alarms and fixed.
 5.2.50 2026-06-19 23:26:55 Sound file changes
 5.2.51 2026-06-20 10:01:11 Changes to Alerts only playing first alert. Many other fixes
-5.2.52 2026-06-22 13:29:45 Includes Pushover support and bug fixes to alert system 
+5.2.52 2026-06-22 13:29:45 Includes Pushover support and bug fixes to alert system (included max push over events per day to stop spammin)
