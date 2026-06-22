@@ -6,10 +6,16 @@ GMRS Live program and the first CAP-Warn system released in 2023. The
 original codebase is archived here:
 
 https://github.com/tmastersmart/gmrs_live/tree/main
+https://github.com/tmastersmart/allstar/tree/main
+Code was distributed in a zip file and installed by my custom
+scripts. (c)2023/2026
 
 CAP-Warn-Weather is a complete redesign and modernization of that
 earlier system, but it continues the same core concepts, alert handling
 logic, and overall philosophy established in the GMRS Live era.
+
+New in the new version is that its installed by APT-GET not my installer.
+It may not work they way others do but thats because I wrote it. 
 
 Because of this history, CAP-Warn-Weather contains many evolved
 components that do not appear in the GitHub source directory. These
