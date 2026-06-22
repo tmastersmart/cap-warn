@@ -128,6 +128,30 @@ No more manual installs — CAP‑Warn now updates with your normal system packa
 CAP‑Warn is designed to run as a lightweight polling script, not a full‑time daemon. It wakes up, checks for new alerts, processes them, and exits. Because of this design, using cron is the most efficient and reliable choice. Cron allows users to choose how often CAP‑Warn runs, supports safe offset scheduling to avoid the top‑of‑hour NWS/NHC update surge, and keeps the system simple without requiring a persistent background service. A systemd service is ideal for programs that must run continuously or restart automatically, but CAP‑Warn doesn’t need that overhead. Cron provides predictable timing, low resource usage, and easy user configuration — making it the right tool for this job. And keeping with goal 4 above.
 
 
+## History
+This project is based on earlier work originally developed for the
+GMRS Live program and the first CAP-Warn system released in 2023. The
+original codebase is archived here:
+
+https://github.com/tmastersmart/gmrs_live
+https://github.com/tmastersmart/allstar/
+Code was distributed in a zip file and installed by my custom
+scripts. (c)2023/2026
+
+They were all based on a weather program I wrote is 2018
+https://pws.winnfreenet.com
+To post weather to Citizens Weather Observation Program 
+(c)2018/2026
+
+CAP-Warn-Weather is a complete redesign and modernization of that
+earlier system, but it continues the same core concepts, alert handling
+logic, and overall philosophy established in the GMRS Live era.
+
+New in the new version is that its installed by APT-GET not my installer.
+It may not work they way others do but thats because I wrote it.
+
+
+
 
 (c)2023/2026 All rights reserved. I wrote it. <img width="200" height="25" alt="copyscape-banner-white-200x25" src="https://github.com/user-attachments/assets/c1662005-fd61-4b98-92c8-19c72f6420eb" />
 
