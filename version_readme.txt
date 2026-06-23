@@ -1,3 +1,9 @@
+Version 5.2.54 - 2026-06-23 02:25:29
+repairing deb reupload
+
+Version 5.2.53 - 2026-06-23 02:21:07
+bug fix missing filename in temp module
+
 Version release file. 
 v1-3 internal beta testing in 2023 No comments were kept before the v3 release 
  v3.4     10/05/2023   Major changes to weather API
