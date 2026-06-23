@@ -1,3 +1,4 @@
+5.2.56 2026-06-23 12:38:23 Fixing bug in GPS code and debug turned off
 5.2.55 2026-06-23 12:29:47 Rewrite GPS code from scratch
 Version 5.2.54 - 2026-06-23 02:25:29 repairing deb reupload
 Version 5.2.53 - 2026-06-23 02:21:07 bug fix missing filename in temp module
